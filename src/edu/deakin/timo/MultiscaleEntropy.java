@@ -127,10 +127,7 @@ public class MultiscaleEntropy{
 		/**Implement the runnable interface*/
 		public void run(){
 			coarseGrain = coarseGraining(dataIn, tau);
-			System.out.println("Coarse grain");
 			se = sampleEntropy(coarseGrain,r,sd,tau,mMax);
-			System.out.println("Tau "+tau+" SE done");
-
 		}
 		
 		/**	Return the calculated SE
@@ -160,7 +157,6 @@ public class MultiscaleEntropy{
 			for (int i = 0; i<cont.length;++i){
 				cont[i] = 0;
 			}
-			System.out.println("Tau "+tau+" SE Arr length "+arr.length+" cont len "+cont.length);
 			for (int i = 0; i<arr.length-mMax;++i){
 				for (int j = i+1; j<arr.length-mMax;++j){
 					int k = 0;
@@ -174,7 +170,6 @@ public class MultiscaleEntropy{
 			}
 			
 			double[] se = new double[mMax];
-			System.out.println("Tau "+tau+" calculated se length "+se.length);
 			for (int i = 1; i <= mMax; ++i){
 				if (cont[i+1] == 0 || cont[i] == 0){
 					se[i-1] = -Math.log(1d/(((double) (arr.length-mMax))*(((double) (arr.length-mMax))-1d )));
