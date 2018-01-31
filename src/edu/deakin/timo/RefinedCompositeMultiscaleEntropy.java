@@ -125,8 +125,8 @@ public class RefinedCompositeMultiscaleEntropy extends BaseClass{
 			for (int k = 0;k<tau;++k){
 				//Get data with the current starting point
 				double[] tempData = new double[arr.length-scale];
-				for (int i = 1+k; i<arr.length-scale+k; ++i){
-					tempData[i-k-1] = arr[i];
+				for (int i = k; i<arr.length-scale+k; ++i){  	//This differs from Ihlen implementation (Ihlen has i = 1+k)
+					tempData[i-k] = arr[i];	//This differs from Ihlen implementation (Ihlen has tempData[i-k-1])
 				}
 				//Calculate the coarse-graining means
 				double[] coarseGrain = coarseGraining(tempData, tau);
@@ -154,7 +154,7 @@ public class RefinedCompositeMultiscaleEntropy extends BaseClass{
 					}
 					//Normalise counts
 					count[0][i]/=(double) (N-m);
-					count[1][i]/=(double) (N-m);
+					count[1][i]/=(double) (N-m-1);	//This differs from Ihlen implementation (Ihlen has N-m)
 				}
 				//Calculate mean count of template matches across all template vectors j
 				for (int i = 0; i<N-m;++i){
@@ -163,7 +163,7 @@ public class RefinedCompositeMultiscaleEntropy extends BaseClass{
 				}
 				//Normalise the counts
 				n[0][k]/=(double) (N-m);
-				n[1][k]/=(double) (N-m);
+				n[1][k]/=(double) (N-m-1);	//This differs from Ihlen implementation (Ihlen has N-m)
 				
 			}
 			//Calculate refined composite entropy
