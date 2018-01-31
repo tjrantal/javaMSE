@@ -25,7 +25,7 @@ public class RefinedCompositeMultiscaleEntropy extends BaseClass{
 		@param	r		tolerance (maximum distance, will be multiplied with dataIn SD)
 		@param	scale	Number of scales (equivalent to tau in MSE)
 	*/
-	public RefinedCompositeMultiscaleEntropy(double[] dataIn, int m, int t, double r, int scale){
+	public RefinedCompositeMultiscaleEntropy(double[] dataIn, int m, double r, int scale){
 		this.dataIn = dataIn;
 		this.m = m;
 		this.r = r;
@@ -125,8 +125,8 @@ public class RefinedCompositeMultiscaleEntropy extends BaseClass{
 			for (int k = 0;k<tau;++k){
 				//Get data with the current starting point
 				double[] tempData = new double[arr.length-scale];
-				for (int i = k; i<arr.length-scale+k; ++i){
-					tempData[i-k] = arr[i];
+				for (int i = 1+k; i<arr.length-scale+k; ++i){
+					tempData[i-k-1] = arr[i];
 				}
 				//Calculate the coarse-graining means
 				double[] coarseGrain = coarseGraining(tempData, tau);
@@ -144,15 +144,17 @@ public class RefinedCompositeMultiscaleEntropy extends BaseClass{
 						}
 						//if kk == m all data points matched the template -> increment count, and check m+1
 						if (kk == m){
-							count[0][i]++;	//increment m, all were under tolerance
+							count[0][i]+=1d;	//increment m, all were under tolerance
 							if (j+m < coarseGrain.length && Math.abs(coarseGrain[i+m] - coarseGrain[j+m]) <= tolerance){
-								count[1][i]++;	//increment m+1, all were under tolerance
+								count[1][i]+=1d;	//increment m+1, all were under tolerance
 							}
 							
 						}
 						
 					}
-					
+					//Normalise counts
+					count[0][i]/=(double) (N-m);
+					count[1][i]/=(double) (N-m);
 				}
 				//Calculate mean count of template matches across all template vectors j
 				for (int i = 0; i<N-m;++i){
@@ -160,8 +162,8 @@ public class RefinedCompositeMultiscaleEntropy extends BaseClass{
 					n[1][k] +=count[1][i];
 				}
 				//Normalise the counts
-				n[0][k]/=Math.pow((double) (N-m),2d);
-				n[1][k]/=Math.pow((double) (N-m-1),2d);
+				n[0][k]/=(double) (N-m);
+				n[1][k]/=(double) (N-m);
 				
 			}
 			//Calculate refined composite entropy
