@@ -7,3 +7,6 @@ Use the ant build script to build. The script will create a .jar file to ./build
 
 Alternatively cd to ./src and javac edu/deakin/timo/MultiscaleEntropy.java
 javaaddpath the path to MultiscaleEntropy.class to use the class in matlab.
+
+Updated 30.1.2018
+Started implementing the refined composite multiscale entropy (RCME), and refined multiscale permutation entropy (RMPE) reported by Ihlen  and colleagues (2016) in J Biomech 49(9):1420-1428.
