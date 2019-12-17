@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+repositories {
+}
+
+configurations {
+}
+
+dependencies {
+}
+
+
+
+sourceCompatibility = 1.6
+version = '1.0.0'
+jar {
+	manifest {
+	  attributes	'Implementation-Title': name,
+		         	'Implementation-Version': version
+	}
+	
+}

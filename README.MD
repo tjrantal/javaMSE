@@ -3,10 +3,13 @@ Class to calculate multiscale entropy. Ported from M. Costa's C implementation, 
 Ported from C to java by Timo Rantalainen 2014 tjrantal at gmail dot com. The C source (not included) written by M Costa 2004 was copied from http://physionet.org/physiotools/mse/
 Licensed with the GPL as per Costa's licensing. Implemented calculating MSE for different coarseness levels simultaneously by treading to utilize the multiple cores often found in contemporary PCs.
 
-Use the ant build script to build. The script will create a .jar file to ./build directory. javaaddpath that jar in your matlab script to use the class.
+Use the gradle build script to build. The script will create a .jar file to ./build/libs directory. javaaddpath that jar in your matlab script to use the class.
 
 Alternatively cd to ./src and javac edu/deakin/timo/MultiscaleEntropy.java
 javaaddpath the path to MultiscaleEntropy.class to use the class in matlab.
 
+Test sample provided in 
+src/matlabTest folder (depends on having compiled the .jar with gradle)
+
 Updated 30.1.2018
-Started implementing the refined composite multiscale entropy (RCME), and refined multiscale permutation entropy (RMPE) reported by Ihlen  and colleagues (2016) in J Biomech 49(9):1420-1428.
+Implemented the refined composite multiscale entropy (RCME), and refined multiscale permutation entropy (RMPE) reported by Ihlen  and colleagues (2016) in J Biomech 49(9):1420-1428.
